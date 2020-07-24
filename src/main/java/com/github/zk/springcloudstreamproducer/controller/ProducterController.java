@@ -19,7 +19,9 @@ public class ProducterController {
     @RequestMapping("/send/{msg}")
     public void sendMsg(@PathVariable("msg") String msg){
         for (int i=0;i<10;i++) {
-            iSendService.sendMsg(msg + i);
+            //id为指定分区号，有yml配置partitionKeyExpression: payload.id 决定哪个字段为分区号
+            String json = "{\"id\":\"0\",\"name\":\"zk\"}";
+            iSendService.sendMsg(json + i);
         }
     }
     @RequestMapping("/send2/{msg}")
